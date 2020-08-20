@@ -1,25 +1,31 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { ApolloProvider } from '@apollo/client';
+import { BrowserRouter } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
+import { MuiThemeProvider } from '@material-ui/core/styles';
+
+import apolloClient from './graphql';
+
+import materialTheme from './styles/materialTheme';
+import GlobalStyle from './styles/globalStyle';
+import PageLayout from './containers/PageLayout';
+
+import Routes from './routes';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ApolloProvider client={apolloClient}>
+      <ThemeProvider theme={materialTheme}>
+        <MuiThemeProvider theme={materialTheme}>
+          <GlobalStyle />
+          <BrowserRouter>
+            <PageLayout>
+              <Routes />
+            </PageLayout>
+          </BrowserRouter>
+        </MuiThemeProvider>
+      </ThemeProvider>
+    </ApolloProvider>
   );
 }
 
