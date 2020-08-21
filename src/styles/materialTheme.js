@@ -10,6 +10,9 @@ export default createMuiTheme({
       // This is green.A700 as hex.
       main: '#00b3db',
     },
+    tertiary: {
+      main: 'linear-gradient(to right,#674793 0%,#00b3db 100%)',
+    },
     gradient: 'linear-gradient(to right,#674793 0%,#00b3db 100%)',
   },
 });

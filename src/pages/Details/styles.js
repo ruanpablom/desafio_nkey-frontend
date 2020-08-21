@@ -39,7 +39,6 @@ export const Info = styled.div`
     font-size: 0.9rem;
     margin-bottom: 0.2rem;
   }
-  span,
   .container {
     margin-top: 0.4rem;
   }
@@ -52,6 +51,7 @@ export const Info = styled.div`
 
 export const ChipsContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
 `;
 
 export const Description = styled.div`

@@ -13,5 +13,8 @@ export const StyledChip = styled(Chip)`
   &:hover {
     background-color: ${(props) => props.theme.palette.secondary.main};
     color: ${(props) => props.theme.palette.primary.main};
+    svg {
+      color: ${(props) => props.theme.palette.primary.main};
+    }
   }
 `;

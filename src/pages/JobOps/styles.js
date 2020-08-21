@@ -1,6 +1,22 @@
 import styled from 'styled-components';
-import { Card } from '@material-ui/core';
+import { Card, IconButton } from '@material-ui/core';
 import { StyledChip } from '../../components';
+
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const AddButton = styled(IconButton)`
+  && {
+    background: ${(props) => props.theme.palette.secondary.main};
+    margin-bottom: 1rem;
+
+    :hover {
+      background: ${(props) => props.theme.palette.secondary.main};
+    }
+  }
+`;
 
 export const JobOpsList = styled.div`
   display: flex;

@@ -1,19 +1,29 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
+import { useField } from '@unform/core';
+import { TextField as Input } from '@material-ui/core';
+import PropTypes from 'prop-types';
 
 // import { Container } from './styles';
 
-function Material() {
+function TextField({ name, ...rest }) {
+  const inputRef = useRef(null);
+  const { fieldName, registerField, error } = useField(name);
+
+  useEffect(() => {
+    registerField({
+      name: fieldName,
+      ref: inputRef.current,
+      path: 'value',
+    });
+  }, [fieldName, registerField]);
+
   return (
-    <TextField
-      id="outlined-multiline-static"
-      label="Description"
-      multiline
-      rows={4}
-      variant="outlined"
-      defaultValue={description}
-      onChange={handleChangeDescription}
-    />
+    <>
+      <Input inputRef={inputRef} error={error} helperText={error} {...rest} />
+    </>
   );
 }
-
-export default Material;
+TextField.propTypes = {
+  name: PropTypes.string.isRequired,
+};
+export default TextField;
