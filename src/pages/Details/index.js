@@ -72,7 +72,7 @@ function Details() {
 
         cache.writeQuery({
           query: JOB_OPS,
-          data: { ...filteredData },
+          data: { ...cachedQuery, jobOps: filteredData },
         });
       },
     });
@@ -135,7 +135,7 @@ function Details() {
             >
               <Card>
                 <CardContent>
-                  <h3>Do you really want delete this Job Opportunoty?</h3>
+                  <h3>Do you really want delete this Job Opportunity?</h3>
                   <CardActions>
                     <DeleteButton variant="contained" onClick={onDeleteJobOp}>
                       DELETE

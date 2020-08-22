@@ -8,6 +8,7 @@ import {
   Add,
 } from '@material-ui/icons';
 import { useQuery } from '@apollo/client';
+import client from '../../graphql';
 
 import { JOB_OPS } from '../../graphql/query';
 

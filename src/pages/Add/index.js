@@ -1,10 +1,11 @@
-import React, { useState, useRef, createRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { CardContent, Button, IconButton } from '@material-ui/core';
 import { Add as IconAdd } from '@material-ui/icons';
 import { useMutation } from '@apollo/client';
 import * as Yup from 'yup';
 
 import { ADD_JOBOP } from '../../graphql/mutation';
+import { JOB_OPS } from '../../graphql/query';
 import addSchema from '../../YupSchemas/add';
 
 import {
@@ -22,7 +23,7 @@ function Add() {
   const [reqKnowledges, setReqKnowledges] = useState([]);
   const reqInputRef = useRef(null);
   const formRef = useRef(null);
-  const [addJobOp, { data }] = useMutation(ADD_JOBOP, {
+  const [addJobOp] = useMutation(ADD_JOBOP, {
     onCompleted: () => {
       formRef.current.reset();
       setReqKnowledges([]);
@@ -62,6 +63,15 @@ function Add() {
       addJobOp({
         variables: {
           jobOpInput,
+        },
+        update: (cache) => {
+          const cachedQuery = cache.readQuery({ query: JOB_OPS });
+
+          const newJob = [...cachedQuery.jobOps, jobOpInput];
+          cache.writeQuery({
+            query: JOB_OPS,
+            data: { ...cachedQuery, jobOps: newJob },
+          });
         },
       });
     } catch (err) {
