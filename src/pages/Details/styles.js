@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Card, CardContent } from '@material-ui/core';
+import { Card, CardContent, Modal, Button } from '@material-ui/core';
 import { StyledChip } from '../../components';
 
 export const Container = styled.div`
@@ -56,6 +56,24 @@ export const ChipsContainer = styled.div`
 
 export const Description = styled.div`
   margin-top: 1rem;
+`;
+
+export const StyledModal = styled(Modal)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const DeleteButton = styled(Button)`
+  && {
+    background: red;
+    color: ${(props) => props.theme.palette.primary.main};
+    font-size: 1rem;
+    font-weight: bold;
+    :hover {
+      background: red;
+    }
+  }
 `;
 
 export { StyledChip };

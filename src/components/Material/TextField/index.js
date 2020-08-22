@@ -10,7 +10,6 @@ const TextField = forwardRef(({ name, ...rest }, ref) => {
   const { fieldName, registerField, error } = useField(name);
 
   const wichRef = ref || inputRef;
-  console.log(ref, name);
 
   useEffect(() => {
     registerField({

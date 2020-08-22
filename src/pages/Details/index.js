@@ -1,5 +1,12 @@
-import React from 'react';
-import { CircularProgress, IconButton } from '@material-ui/core';
+import React, { useState } from 'react';
+import {
+  CircularProgress,
+  IconButton,
+  Card,
+  CardContent,
+  CardActions,
+  Button,
+} from '@material-ui/core';
 import {
   AttachMoneyOutlined,
   BusinessOutlined,
@@ -8,9 +15,10 @@ import {
   Delete,
 } from '@material-ui/icons';
 import { useLocation, useHistory } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 
-import { JOB_OP } from '../../graphql/query';
+import { JOB_OP, JOB_OPS } from '../../graphql/query';
+import { DELETE_JOBOP } from '../../graphql/mutation';
 
 import {
   Container,
@@ -22,6 +30,8 @@ import {
   StyledCardContent,
   ChipsContainer,
   Description,
+  StyledModal,
+  DeleteButton,
 } from './styles';
 
 import currencyFormatter from '../../utils/currencyFormatter';
@@ -29,7 +39,11 @@ import currencyFormatter from '../../utils/currencyFormatter';
 function Details() {
   const location = useLocation();
   const history = useHistory();
+  const [openModal, setOpenModal] = useState();
   const { loading, error, data } = useQuery(JOB_OP, {
+    variables: { id: location.params },
+  });
+  const [deleteJobOp] = useMutation(DELETE_JOBOP, {
     variables: { id: location.params },
   });
 
@@ -39,6 +53,31 @@ function Details() {
     history.push('/');
     return <div />;
   }
+
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
+
+  const onDeleteJobOp = () => {
+    deleteJobOp({
+      update: (cache) => {
+        const cachedQuery = cache.readQuery({ query: JOB_OPS });
+        const filteredData = cachedQuery.jobOps.filter(
+          ({ id: itemId }) => itemId !== location.params
+        );
+
+        cache.writeQuery({
+          query: JOB_OPS,
+          data: { ...filteredData },
+        });
+      },
+    });
+    history.push('/');
+  };
 
   return (
     <Container>
@@ -84,9 +123,28 @@ function Details() {
               </ChipsContainer>
             </Info>
           </InfosContainer>
-          <IconButton>
-            <Delete size="large" />
-          </IconButton>
+          <div>
+            <IconButton onClick={handleOpenModal}>
+              <Delete size="large" />
+            </IconButton>
+            <StyledModal
+              open={openModal}
+              onClose={handleCloseModal}
+              aria-labelledby="simple-modal-title"
+              aria-describedby="simple-modal-description"
+            >
+              <Card>
+                <CardContent>
+                  <h3>Do you really want delete this Job Opportunoty?</h3>
+                  <CardActions>
+                    <DeleteButton variant="contained" onClick={onDeleteJobOp}>
+                      DELETE
+                    </DeleteButton>
+                  </CardActions>
+                </CardContent>
+              </Card>
+            </StyledModal>
+          </div>
         </StyledCardContent>
       </StyledCard>
       <StyledCard>

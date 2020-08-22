@@ -7,3 +7,9 @@ export const ADD_JOBOP = gql`
     }
   }
 `;
+
+export const DELETE_JOBOP = gql`
+  mutation DeleteJobOp($id: ID!) {
+    deleteJobOp(id: $id)
+  }
+`;
