@@ -1,10 +1,11 @@
 import React, { useState, useRef } from 'react';
+import { useLocation, useHistory } from 'react-router-dom';
 import { CardContent, Button, IconButton } from '@material-ui/core';
 import { Add as IconAdd } from '@material-ui/icons';
 import { useMutation } from '@apollo/client';
 import * as Yup from 'yup';
 
-import { ADD_JOBOP } from '../../graphql/mutation';
+import { ADD_JOBOP, UPDATE_JOBOP } from '../../graphql/mutation';
 import { JOB_OPS } from '../../graphql/query';
 import addSchema from '../../YupSchemas/add';
 
@@ -20,13 +21,22 @@ import {
 } from './styles';
 
 function Add() {
-  const [reqKnowledges, setReqKnowledges] = useState([]);
+  const location = useLocation();
+  const history = useHistory();
+  const [reqKnowledges, setReqKnowledges] = useState(
+    (location.state && location.state.jobOp.tags) || []
+  );
   const reqInputRef = useRef(null);
   const formRef = useRef(null);
   const [addJobOp] = useMutation(ADD_JOBOP, {
     onCompleted: () => {
       formRef.current.reset();
       setReqKnowledges([]);
+    },
+  });
+  const [updateJob] = useMutation(UPDATE_JOBOP, {
+    onCompleted: () => {
+      history.push('/details', { id: location.state.jobOp.id });
     },
   });
 
@@ -60,20 +70,32 @@ function Add() {
         abortEarly: false,
       });
 
-      addJobOp({
-        variables: {
-          jobOpInput,
-        },
-        update: (cache) => {
-          const cachedQuery = cache.readQuery({ query: JOB_OPS });
+      const update = (cache) => {
+        const cachedQuery = cache.readQuery({ query: JOB_OPS });
 
-          const newJob = [...cachedQuery.jobOps, jobOpInput];
-          cache.writeQuery({
-            query: JOB_OPS,
-            data: { ...cachedQuery, jobOps: newJob },
-          });
-        },
-      });
+        const newJob = [...cachedQuery.jobOps, jobOpInput];
+        cache.writeQuery({
+          query: JOB_OPS,
+          data: { ...cachedQuery, jobOps: newJob },
+        });
+      };
+
+      if (location.state && location.state.update) {
+        updateJob({
+          variables: {
+            id: location.state.jobOp.id,
+            jobOpInputUpdate: jobOpInput,
+          },
+          update,
+        });
+      } else {
+        addJobOp({
+          variables: {
+            jobOpInput,
+          },
+          update,
+        });
+      }
     } catch (err) {
       const validationErrors = {};
 
@@ -90,18 +112,23 @@ function Add() {
   return (
     <StyledCard>
       <CardContent>
-        <Title>Add Job Opportunity</Title>
+        <Title>
+          {location.state && location.state.update ? 'Update' : 'Add'} Job
+          Opportunity
+        </Title>
         <StyledForm ref={formRef} onSubmit={handleSubmit}>
           <Input
             name="title"
             autoFocus
             label="Title"
             fullWidth
+            defaultValue={location.state && location.state.jobOp.title}
             variant="outlined"
             color="secondary"
           />
           <Input
             name="location"
+            defaultValue={location.state && location.state.jobOp.location}
             label="Location"
             fullWidth
             variant="outlined"
@@ -136,6 +163,9 @@ function Add() {
           <SalaryRangeContainer>
             <Input
               name="min"
+              defaultValue={
+                location.state && location.state.jobOp.jobSalary.min
+              }
               label="Min"
               variant="outlined"
               color="secondary"
@@ -143,6 +173,9 @@ function Add() {
             <Input
               name="max"
               label="Max"
+              defaultValue={
+                location.state && location.state.jobOp.jobSalary.max
+              }
               variant="outlined"
               color="secondary"
               style={{ marginTop: 0, marginLeft: '1rem' }}
@@ -151,6 +184,7 @@ function Add() {
           <Input
             name="description"
             label="Description"
+            defaultValue={location.state && location.state.jobOp.description}
             multiline
             rows={10}
             fullWidth

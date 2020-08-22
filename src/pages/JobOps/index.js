@@ -8,7 +8,6 @@ import {
   Add,
 } from '@material-ui/icons';
 import { useQuery } from '@apollo/client';
-import client from '../../graphql';
 
 import { JOB_OPS } from '../../graphql/query';
 
@@ -50,7 +49,7 @@ function JobOps() {
       <JobOpsList>
         {data.jobOps.map((jobOp) => (
           <JobOp key={jobOp.id}>
-            <Link to={{ pathname: '/details', params: jobOp.id }}>
+            <Link to={{ pathname: '/details', state: { id: jobOp.id } }}>
               <StyledCard>
                 <CardContent>
                   <Title>{jobOp.title}</Title>

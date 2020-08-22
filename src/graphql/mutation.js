@@ -13,3 +13,9 @@ export const DELETE_JOBOP = gql`
     deleteJobOp(id: $id)
   }
 `;
+
+export const UPDATE_JOBOP = gql`
+  mutation UpdateJobOp($id: ID!, $jobOpInputUpdate: JobOpInputUpdate!) {
+    updateJobOp(id: $id, jobOpInputUpdate: $jobOpInputUpdate)
+  }
+`;

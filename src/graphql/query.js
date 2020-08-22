@@ -19,6 +19,7 @@ export const JOB_OPS = gql`
 export const JOB_OP = gql`
   query GetJobOp($id: ID!) {
     jobOp(id: $id) {
+      id
       title
       description
       location

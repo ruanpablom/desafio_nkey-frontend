@@ -5,7 +5,6 @@ import {
   Card,
   CardContent,
   CardActions,
-  Button,
 } from '@material-ui/core';
 import {
   AttachMoneyOutlined,
@@ -13,6 +12,7 @@ import {
   LocationOnOutlined,
   Work,
   Delete,
+  Edit,
 } from '@material-ui/icons';
 import { useLocation, useHistory } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
@@ -41,10 +41,10 @@ function Details() {
   const history = useHistory();
   const [openModal, setOpenModal] = useState();
   const { loading, error, data } = useQuery(JOB_OP, {
-    variables: { id: location.params },
+    variables: { id: location.state.id },
   });
   const [deleteJobOp] = useMutation(DELETE_JOBOP, {
-    variables: { id: location.params },
+    variables: { id: location.state.id },
   });
 
   if (loading) return <CircularProgress color="primary" />;
@@ -58,16 +58,20 @@ function Details() {
     setOpenModal(true);
   };
 
+  const handleEdit = () => {
+    history.push('/add', { update: true, jobOp: data.jobOp });
+  };
+
   const handleCloseModal = () => {
     setOpenModal(false);
   };
 
-  const onDeleteJobOp = () => {
+  const handleDeleteJobOp = () => {
     deleteJobOp({
       update: (cache) => {
         const cachedQuery = cache.readQuery({ query: JOB_OPS });
         const filteredData = cachedQuery.jobOps.filter(
-          ({ id: itemId }) => itemId !== location.params
+          ({ id: itemId }) => itemId !== location.state.id
         );
 
         cache.writeQuery({
@@ -124,6 +128,9 @@ function Details() {
             </Info>
           </InfosContainer>
           <div>
+            <IconButton>
+              <Edit onClick={handleEdit} size="large" />
+            </IconButton>
             <IconButton onClick={handleOpenModal}>
               <Delete size="large" />
             </IconButton>
@@ -137,7 +144,10 @@ function Details() {
                 <CardContent>
                   <h3>Do you really want delete this Job Opportunity?</h3>
                   <CardActions>
-                    <DeleteButton variant="contained" onClick={onDeleteJobOp}>
+                    <DeleteButton
+                      variant="contained"
+                      onClick={handleDeleteJobOp}
+                    >
                       DELETE
                     </DeleteButton>
                   </CardActions>
