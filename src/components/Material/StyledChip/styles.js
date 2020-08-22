@@ -3,11 +3,11 @@ import { Chip } from '@material-ui/core';
 
 export const StyledChip = styled(Chip)`
   && {
-    margin-top: 10px;
+    margin-top: 0.8rem;
     font-size: 1rem;
   }
   & + & {
-    margin-left: 10px;
+    margin-left: 0.5rem;
   }
 
   &:hover {

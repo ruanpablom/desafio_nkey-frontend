@@ -20,7 +20,7 @@ import {
   StyledCard,
 } from './styles';
 
-function Add() {
+function AddOrUpdate() {
   const location = useLocation();
   const history = useHistory();
   const [reqKnowledges, setReqKnowledges] = useState(
@@ -205,4 +205,4 @@ function Add() {
   );
 }
 
-export default Add;
+export default AddOrUpdate;

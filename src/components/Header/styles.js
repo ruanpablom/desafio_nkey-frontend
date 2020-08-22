@@ -18,6 +18,5 @@ export const StyledToolbar = styled(Toolbar)`
     color: ${(props) => props.theme.palette.primary.main};
     font-weight: bold;
     font-size: 1.5rem;
-    margin-left: 20px;
   }
 `;

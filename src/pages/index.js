@@ -1,5 +1,5 @@
 import JobOps from './JobOps';
 import Details from './Details';
-import Add from './Add';
+import AddOrUpdate from './AddOrUpdate';
 
-export { JobOps, Details, Add };
+export { JobOps, Details, AddOrUpdate };

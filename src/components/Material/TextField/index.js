@@ -17,7 +17,7 @@ const TextField = forwardRef(({ name, ...rest }, ref) => {
       ref: wichRef.current,
       path: 'value',
     });
-  }, [fieldName, registerField]);
+  }, [wichRef, fieldName, registerField]);
 
   return (
     <Input

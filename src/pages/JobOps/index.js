@@ -15,6 +15,7 @@ import currencyFormatter from '../../utils/currencyFormatter';
 
 import {
   Container,
+  ButtonContainer,
   AddButton,
   JobOpsList,
   JobOp,
@@ -36,7 +37,7 @@ function JobOps() {
 
   return (
     <Container>
-      <div>
+      <ButtonContainer>
         <AddButton
           onClick={() => {
             history.push('/add');
@@ -45,7 +46,7 @@ function JobOps() {
         >
           <Add />
         </AddButton>
-      </div>
+      </ButtonContainer>
       <JobOpsList>
         {data.jobOps.map((jobOp) => (
           <JobOp key={jobOp.id}>

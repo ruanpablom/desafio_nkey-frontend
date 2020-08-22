@@ -59,7 +59,7 @@ function Details() {
   };
 
   const handleEdit = () => {
-    history.push('/add', { update: true, jobOp: data.jobOp });
+    history.push('/update', { update: true, jobOp: data.jobOp });
   };
 
   const handleCloseModal = () => {

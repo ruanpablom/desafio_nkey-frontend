@@ -5,12 +5,18 @@ import { StyledChip } from '../../components';
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  width: 100%;
+  margin-bottom: 1rem;
 `;
 
 export const AddButton = styled(IconButton)`
   && {
     background: ${(props) => props.theme.palette.secondary.main};
-    margin-bottom: 1rem;
 
     :hover {
       background: ${(props) => props.theme.palette.secondary.main};
@@ -20,8 +26,8 @@ export const AddButton = styled(IconButton)`
 
 export const JobOpsList = styled.div`
   display: flex;
+  margin: auto;
   flex-direction: column;
-
   a {
     text-decoration: none;
   }
@@ -29,7 +35,7 @@ export const JobOpsList = styled.div`
 
 export const JobOp = styled.div`
   & + & {
-    margin-top: 20px;
+    margin-top: 1rem;
   }
 `;
 
@@ -54,7 +60,7 @@ export const Title = styled.strong`
 `;
 
 export const Location = styled.div`
-  margin-top: 10px;
+  margin-top: 0.7rem;
   display: flex;
   align-items: center;
 
@@ -64,7 +70,7 @@ export const Location = styled.div`
 `;
 
 export const Salary = styled.div`
-  margin-top: 10px;
+  margin-top: 0.7rem;
   display: flex;
   align-items: center;
 
@@ -76,9 +82,8 @@ export const Salary = styled.div`
 
 export const Description = styled.div`
   word-wrap: break-word;
-  margin-top: 10px;
+  margin-top: 0.7rem;
 
-  span,
   #desc {
     display: block;
     overflow: hidden;

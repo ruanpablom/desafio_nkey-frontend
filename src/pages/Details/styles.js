@@ -26,14 +26,30 @@ export const Title = styled.h1``;
 
 export const InfosContainer = styled.div`
   display: flex;
-  margin-top: 20px;
+  margin-top: 1.2rem;
   justify-content: space-between;
+
+  @media (min-width: 300px) {
+    flex-direction: column;
+  }
+
+  @media (min-width: 720px) {
+    flex-direction: row;
+  }
 `;
 
 export const Info = styled.div`
   display: flex;
-  width: 33%;
   flex-direction: column;
+
+  @media (min-width: 300px) {
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  @media (min-width: 720px) {
+    width: 33%;
+  }
 
   small {
     font-size: 0.9rem;
