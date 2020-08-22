@@ -33,7 +33,7 @@ function JobOps() {
   const history = useHistory();
 
   if (loading) return <CircularProgress color="primary" />;
-  if (error) return <div>ERRO: {error}</div>;
+  if (error) return <div>ERRO</div>;
 
   return (
     <Container>
@@ -61,8 +61,8 @@ function JobOps() {
                   <Salary>
                     <AttachMoneyOutlined />
                     <span>
-                      {currencyFormatter(jobOp.jobSalary.min)} -{' '}
-                      {currencyFormatter(jobOp.jobSalary.max)}
+                      {currencyFormatter(jobOp.salaryRange.min)} -{' '}
+                      {currencyFormatter(jobOp.salaryRange.max)}
                     </span>
                   </Salary>
                   <Description>
@@ -73,13 +73,13 @@ function JobOps() {
                     <div>. . .</div>
                   </Description>
                   <ChipsContainer>
-                    {jobOp.tags.map((tag) => (
+                    {jobOp.requirements.map((requirement, id) => (
                       <StyledChip
-                        key={tag}
+                        key={id}
                         size="medium"
                         variant="outlined"
                         color="secondary"
-                        label={tag}
+                        label={requirement}
                       />
                     ))}
                   </ChipsContainer>

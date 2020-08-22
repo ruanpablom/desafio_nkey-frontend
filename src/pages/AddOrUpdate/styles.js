@@ -41,7 +41,7 @@ export const SalaryRangeContainer = styled.div`
 
 export const RequirementsContainer = styled.div`
   display: flex;
-  margin-top: 1rem;
+  margin: 1rem 0 1rem 0;
   align-items: center;
 
   button {
@@ -57,6 +57,7 @@ export const RequirementsContainer = styled.div`
 export const ChipsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
+  margin-bottom: 1rem;
 `;
 
 export { StyledChip };

@@ -9,5 +9,7 @@ export default Yup.object().shape({
   max: Yup.number().required(),
 
   // eslint-disable-next-line react/forbid-prop-types
-  tags: Yup.array(),
+  requirements: Yup.array(),
+  ocupation: Yup.string().required(),
+  experience: Yup.string().required(),
 });

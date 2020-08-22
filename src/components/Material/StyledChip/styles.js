@@ -3,7 +3,6 @@ import { Chip } from '@material-ui/core';
 
 export const StyledChip = styled(Chip)`
   && {
-    margin-top: 0.8rem;
     font-size: 1rem;
   }
   & + & {

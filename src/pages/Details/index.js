@@ -93,15 +93,15 @@ function Details() {
               <small>Salary Range</small>
               <span className="container">
                 <AttachMoneyOutlined />
-                {currencyFormatter(data.jobOp.jobSalary.min)} -{' '}
-                {currencyFormatter(data.jobOp.jobSalary.max)}
+                {currencyFormatter(data.jobOp.salaryRange.min)} -{' '}
+                {currencyFormatter(data.jobOp.salaryRange.max)}
               </span>
             </Info>
             <Info>
               <small>Ocupation Area and City</small>
               <span className="container">
                 <BusinessOutlined />
-                TODO
+                {data.jobOp.ocupation}
               </span>
               <span className="container">
                 <LocationOnOutlined />
@@ -112,10 +112,10 @@ function Details() {
               <small>Requirements</small>
               <span className="container">
                 <Work />
-                TODO
+                {data.jobOp.experience}
               </span>
               <ChipsContainer>
-                {data.jobOp.tags.map((tag) => (
+                {data.jobOp.requirements.map((tag) => (
                   <StyledChip
                     key={tag}
                     size="medium"

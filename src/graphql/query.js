@@ -7,11 +7,13 @@ export const JOB_OPS = gql`
       title
       description
       location
-      jobSalary {
+      salaryRange {
         min
         max
       }
-      tags
+      requirements
+      ocupation
+      experience
     }
   }
 `;
@@ -23,11 +25,13 @@ export const JOB_OP = gql`
       title
       description
       location
-      jobSalary {
+      salaryRange {
         min
         max
       }
-      tags
+      requirements
+      ocupation
+      experience
     }
   }
 `;

@@ -11,6 +11,7 @@
     "@testing-library/user-event": "^7.1.2",
     "@unform/core": "^2.1.3",
     "@unform/web": "^2.1.3",
+    "global": "^4.4.0",
     "graphql": "^15.3.0",
     "jodit": "^3.4.23",
     "jodit-react": "^1.0.59",
@@ -20,6 +21,7 @@
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
+    "react-toastify": "^6.0.8",
     "styled-components": "^5.1.1",
     "yup": "^0.29.3"
   },

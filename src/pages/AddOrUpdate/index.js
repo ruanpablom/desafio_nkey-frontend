@@ -24,7 +24,7 @@ function AddOrUpdate() {
   const location = useLocation();
   const history = useHistory();
   const [reqKnowledges, setReqKnowledges] = useState(
-    (location.state && location.state.jobOp.tags) || []
+    (location.state && location.state.jobOp.requirements) || []
   );
   const reqInputRef = useRef(null);
   const formRef = useRef(null);
@@ -54,12 +54,14 @@ function AddOrUpdate() {
     const jobOpInput = {
       title: dataForm.title,
       location: dataForm.location,
-      tags: reqKnowledges,
-      jobSalary: {
+      requirements: reqKnowledges,
+      salaryRange: {
         min: Number(dataForm.min),
         max: Number(dataForm.max),
       },
       description: dataForm.description,
+      experience: dataForm.experience,
+      ocupation: dataForm.ocupation,
     };
 
     try {
@@ -159,12 +161,26 @@ function AddOrUpdate() {
               />
             ))}
           </ChipsContainer>
+          <Input
+            name="experience"
+            defaultValue={location.state && location.state.jobOp.experience}
+            label="Experience"
+            variant="outlined"
+            color="secondary"
+          />
+          <Input
+            name="ocupation"
+            defaultValue={location.state && location.state.jobOp.ocupation}
+            label="Ocupation"
+            variant="outlined"
+            color="secondary"
+          />
           <strong className="fields-description">Job Salary range</strong>
           <SalaryRangeContainer>
             <Input
               name="min"
               defaultValue={
-                location.state && location.state.jobOp.jobSalary.min
+                location.state && location.state.jobOp.salaryRange.min
               }
               label="Min"
               variant="outlined"
@@ -174,7 +190,7 @@ function AddOrUpdate() {
               name="max"
               label="Max"
               defaultValue={
-                location.state && location.state.jobOp.jobSalary.max
+                location.state && location.state.jobOp.salaryRange.max
               }
               variant="outlined"
               color="secondary"
