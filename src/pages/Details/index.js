@@ -1,10 +1,11 @@
 import React from 'react';
-import { CircularProgress } from '@material-ui/core';
+import { CircularProgress, IconButton } from '@material-ui/core';
 import {
   AttachMoneyOutlined,
   BusinessOutlined,
   LocationOnOutlined,
   Work,
+  Delete,
 } from '@material-ui/icons';
 import { useLocation, useHistory } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
@@ -83,6 +84,9 @@ function Details() {
               </ChipsContainer>
             </Info>
           </InfosContainer>
+          <IconButton>
+            <Delete size="large" />
+          </IconButton>
         </StyledCardContent>
       </StyledCard>
       <StyledCard>

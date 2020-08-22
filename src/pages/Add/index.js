@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, createRef } from 'react';
 import { CardContent, Button, IconButton } from '@material-ui/core';
 import { Add as IconAdd } from '@material-ui/icons';
 import { useMutation } from '@apollo/client';
@@ -20,9 +20,14 @@ import {
 
 function Add() {
   const [reqKnowledges, setReqKnowledges] = useState([]);
-  const reqInputRef = useRef();
+  const reqInputRef = useRef(null);
   const formRef = useRef(null);
-  const [addJobOp, { data }] = useMutation(ADD_JOBOP);
+  const [addJobOp, { data }] = useMutation(ADD_JOBOP, {
+    onCompleted: () => {
+      formRef.current.reset();
+      setReqKnowledges([]);
+    },
+  });
 
   const addReqKnowledge = () => {
     setReqKnowledges([...reqKnowledges, reqInputRef.current.value]);
@@ -35,10 +40,6 @@ function Add() {
   };
 
   const handleSubmit = async (dataForm) => {
-    const jobSalary = {
-      min: dataForm.min,
-      max: dataForm.max,
-    };
     const jobOpInput = {
       title: dataForm.title,
       location: dataForm.location,
@@ -50,7 +51,6 @@ function Add() {
       description: dataForm.description,
     };
 
-    console.log(dataForm);
     try {
       // remove all previous errors
       formRef.current.setErrors({});
@@ -65,7 +65,6 @@ function Add() {
         },
       });
     } catch (err) {
-      console.log(err);
       const validationErrors = {};
 
       if (err instanceof Yup.ValidationError) {
@@ -100,8 +99,8 @@ function Add() {
           />
           <RequirementsContainer>
             <Input
+              ref={reqInputRef}
               name="reqKnowledge"
-              inputRef={reqInputRef}
               label="Required Knowledges"
               fullWidth
               variant="outlined"
