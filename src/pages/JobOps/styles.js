@@ -43,7 +43,7 @@ export const StyledCard = styled(Card)`
   display: flex;
 
   @media (min-width: 300px) {
-    width: 300px;
+    width: calc(300px - 1rem);
   }
 
   @media (min-width: 720px) {
@@ -84,7 +84,7 @@ export const Description = styled.div`
   word-wrap: break-word;
   margin-top: 0.7rem;
 
-  #desc {
+  .desc {
     display: block;
     overflow: hidden;
     max-height: 110px;

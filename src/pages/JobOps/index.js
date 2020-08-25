@@ -66,10 +66,7 @@ function JobOps() {
                     </span>
                   </Salary>
                   <Description>
-                    <span
-                      id="desc"
-                      dangerouslySetInnerHTML={{ __html: jobOp.description }}
-                    />
+                    {jobOp.description}
                     <div>. . .</div>
                   </Description>
                   <ChipsContainer>

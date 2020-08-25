@@ -64,6 +64,8 @@ function AddOrUpdate() {
       ocupation: dataForm.ocupation,
     };
 
+    console.log(dataForm.description);
+
     try {
       // remove all previous errors
       formRef.current.setErrors({});

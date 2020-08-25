@@ -52,8 +52,9 @@ export const Info = styled.div`
   }
 
   small {
-    font-size: 0.9rem;
+    font-size: 1rem;
     margin-bottom: 0.2rem;
+    font-weight: bold;
   }
   .container {
     margin-top: 0.4rem;
@@ -62,16 +63,21 @@ export const Info = styled.div`
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+    svg {
+      margin-right: 0.5rem;
+    }
   }
 `;
 
 export const ChipsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
+  margin-top: 0.5rem;
 `;
 
 export const Description = styled.div`
   margin-top: 1rem;
+  white-space: pre-line;
 `;
 
 export const StyledModal = styled(Modal)`

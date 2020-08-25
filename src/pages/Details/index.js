@@ -160,13 +160,7 @@ function Details() {
       <StyledCard>
         <StyledCardContent>
           <Title>Job Description</Title>
-          <Description>
-            <h3
-              dangerouslySetInnerHTML={{
-                __html: data.jobOp.description.replace('\n', '<br>'),
-              }}
-            />
-          </Description>
+          <Description>{data.jobOp.description}</Description>
         </StyledCardContent>
       </StyledCard>
     </Container>
